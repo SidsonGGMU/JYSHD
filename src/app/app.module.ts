@@ -6,17 +6,27 @@ import {AppComponent} from './app.component';
 import {AccueilComponent} from './accueil/accueil.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
+import {StreamViewComponent} from './stream-view/stream-view.component';
+import {StreamItemComponent} from './stream-item/stream-item.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule, MatIconModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccueilComponent
+    AccueilComponent,
+    StreamViewComponent,
+    StreamItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

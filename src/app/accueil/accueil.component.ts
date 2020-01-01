@@ -9,8 +9,8 @@ import {DeviceGeoLocation, Result} from "../models/models";
 })
 export class AccueilComponent implements OnInit {
 
-  public deviceLocationData: DeviceGeoLocation[] = []
-  public streamData: Result[] = []
+  public deviceLocationData: DeviceGeoLocation[] = [];
+  public streamData: Result[] = [];
 
   constructor(private dataService: DataserviceService) {
   }
