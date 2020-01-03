@@ -9,7 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {StreamViewComponent} from './stream-view/stream-view.component';
 import {StreamItemComponent} from './stream-item/stream-item.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatIconModule, MatProgressSpinnerModule} from '@angular/material';
 
 
 @NgModule({
@@ -26,7 +26,9 @@ import {MatButtonModule, MatIconModule} from '@angular/material';
     HttpClientModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

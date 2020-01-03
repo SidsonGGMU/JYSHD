@@ -1,1 +1,22 @@
-<p>stream-item works!</p>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class=""></div>
+    <mat-card-title>{{month}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <span>Température max : {{maxTemperature()}}</span>
+    </div>
+    <div>
+      <span>Température moyenne : {{(maxTemperature() + minTemperature())/2}}</span>
+    </div>
+    <div>
+      <span>Température min : {{minTemperature()}}</span>
+    </div>
+    <div>
+      <span>Nombre d'incendies : {{nbFire()}}</span>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+  </mat-card-actions>
+</mat-card>
