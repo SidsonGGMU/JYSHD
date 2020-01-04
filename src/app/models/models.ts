@@ -52,3 +52,11 @@ export interface DeviceGeoLocation {
   lon: number;
   lat: number;
 }
+
+export interface StreamSummary {
+  month: string;
+  data: Result[];
+  minTemperature: number;
+  maxTemperature: number;
+  nbFire: number;
+}
