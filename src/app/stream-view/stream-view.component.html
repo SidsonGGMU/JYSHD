@@ -6,8 +6,8 @@
 
 <ng-template #dataBlock>
   <ng-container *ngIf="hasData() else noDataBlock">
-    <div *ngFor="let data of streamDataMap | keyvalue">
-      <app-stream-item [month]="data.key" [result]="data.value"></app-stream-item>
+    <div *ngFor="let currItem of streamData">
+      <app-stream-item [dataStreamSummary]="currItem"></app-stream-item>
     </div>
   </ng-container>
   <ng-template #noDataBlock>

@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Result} from '../models/models';
-import { criticalTemperature } from '../helpers/common';
+import {StreamSummary} from '../models/models';
 
 @Component({
   selector: 'app-stream-item',
@@ -9,28 +8,11 @@ import { criticalTemperature } from '../helpers/common';
 })
 export class StreamItemComponent implements OnInit {
 
-  @Input() month: string;
-  @Input() result: Result[] = [];
-
-
-  public nbFire = () => this.result.filter(currentValue => currentValue.data.temperature > criticalTemperature).length;
+  @Input() dataStreamSummary: StreamSummary;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-
-  maxTemperature() {
-    return this.result.reduce((previewValue, currentValue) =>
-      currentValue.data.temperature > previewValue.data.temperature ? currentValue : previewValue)
-      .data.temperature;
-  }
-
-  minTemperature() {
-    return this.result.reduce((previewValue, currentValue) =>
-      currentValue.data.temperature < previewValue.data.temperature ? currentValue : previewValue)
-      .data.temperature;
   }
 
 }
