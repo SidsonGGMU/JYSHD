@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {criticalTemperature, MONTHS} from '../helpers/common';
+import {criticalTemperature, genericValue, MONTHS} from '../helpers/common';
 import {Result, StreamSummary} from '../models/models';
 
 @Injectable({
@@ -7,15 +7,14 @@ import {Result, StreamSummary} from '../models/models';
 })
 export class StreamSummaryService {
 
-  private genericValue = 10;
-
   constructor() {
   }
 
   generateStream(streamData: Result[] = []): StreamSummary[] {
     let blockInterval = 0;
     return MONTHS.map(currentMonth => {
-      const tmpData = streamData.filter((value, index) => index >= blockInterval && index < blockInterval + 30);
+      let tmpData = streamData.filter((value, index) => index >= blockInterval && index < blockInterval + 30);
+      tmpData = this.rebuildTemperature(tmpData);
       blockInterval = blockInterval + 30;
       return {
         month: currentMonth,
@@ -28,21 +27,28 @@ export class StreamSummaryService {
   }
 
   maxTemperature(streamData: Result[] = []) {
-    const maxValue = streamData.reduce((previewValue, currentValue) =>
+    return streamData.reduce((previewValue, currentValue) =>
       currentValue.data.temperature > previewValue.data.temperature ? currentValue : previewValue)
       .data.temperature;
-    return isNaN(maxValue) ? this.genericValue : maxValue;
   }
 
   minTemperature(streamData: Result[] = []) {
-    const minValue = streamData.reduce((previewValue, currentValue) =>
+    return streamData.reduce((previewValue, currentValue) =>
       currentValue.data.temperature < previewValue.data.temperature ? currentValue : previewValue)
       .data.temperature;
-    return isNaN(minValue) ? this.genericValue : minValue;
   }
 
   public nbFire(streamData: Result[] = []) {
     return streamData.filter(currentValue => currentValue.data.temperature > criticalTemperature).length;
+  }
+
+  private rebuildTemperature(data: Result[] = []) {
+    return data.map(item => {
+      if (isNaN(item.data.temperature)) {
+        item.data.temperature = genericValue;
+      }
+      return item;
+    });
   }
 
 }
