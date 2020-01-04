@@ -2,12 +2,14 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataserviceService} from '../services/dataservice.service';
 import {Result} from '../models/models';
 import {Subscription} from 'rxjs';
+import { MONTHS } from '../helpers/common';
 
 @Component({
   selector: 'app-stream-view',
   templateUrl: './stream-view.component.html',
   styleUrls: ['./stream-view.component.scss']
 })
+
 export class StreamViewComponent implements OnInit, OnDestroy {
 
   public streamData: Result[] = [];
@@ -40,7 +42,7 @@ export class StreamViewComponent implements OnInit, OnDestroy {
     let blockInterval = 0;
     MONTHS.forEach(month => {
       let tmpData: Result[];
-      tmpData = this.streamData.filter((value, index) => index >= blockInterval && index < blockInterval + 30)
+      tmpData = this.streamData.filter((value, index) => index >= blockInterval && index < blockInterval + 30);
       this.streamDataMap.set(month, tmpData);
       blockInterval = blockInterval + 30;
     });
@@ -64,6 +66,3 @@ export class StreamViewComponent implements OnInit, OnDestroy {
   }
 
 }
-
-const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
-

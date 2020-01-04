@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Result} from '../models/models';
+import { criticalTemperature } from '../helpers/common';
 
 @Component({
   selector: 'app-stream-item',
@@ -11,9 +12,8 @@ export class StreamItemComponent implements OnInit {
   @Input() month: string;
   @Input() result: Result[] = [];
 
-  private criticalTemperature = 40;
 
-  public nbFire = () => this.result.filter(currentValue => currentValue.data.temperature > this.criticalTemperature).length;
+  public nbFire = () => this.result.filter(currentValue => currentValue.data.temperature > criticalTemperature).length;
 
   constructor() { }
 
