@@ -1,3 +1,23 @@
+#stream-page {
+  margin: 20px;
+}
+
 #loading {
 
+}
+
+
+.stream-container {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+
+.stream-content {
+  width: 22em;
+  margin-bottom: 40px;
 }
