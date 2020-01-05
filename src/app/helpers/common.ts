@@ -29,3 +29,5 @@ export const fakeFidecObject: DeviceGeoLocation = {
   lon: 5.734980,
   lat: 45.185117
 };
+export const  genericValue = 23;
+export const divisor = {value: 1};
