@@ -23,7 +23,6 @@ export class AccueilComponent implements OnInit, OnDestroy {
   private weatherSubscription: Subscription;
   public step = 0;
   public stoppedAudio: boolean;
-  public isTested: boolean;
   public fakeFidec: DeviceGeoLocation;
 
   constructor(private dataService: DataserviceService, private apixuService: ApixuService, private mapService: MapService) {
@@ -57,7 +56,6 @@ export class AccueilComponent implements OnInit, OnDestroy {
       this.streamData = data.result[0];
       this.streamData.at = this.getTime(this.streamData.at);
       if (this.streamData.data.temperature > criticalTemperature) {
-        this.isTested = true;
         this.isFire = true;
         this.playAudio();
       } else {
@@ -70,12 +68,11 @@ export class AccueilComponent implements OnInit, OnDestroy {
         this.streamData = data.result[0];
         this.streamData.at = this.getTime(this.streamData.at);
         if (this.streamData.data.temperature > criticalTemperature) {
-          if (!this.stoppedAudio && !this.isTested) {
+          if (!this.stoppedAudio) {
             this.isFire = true;
             this.playAudio();
           }
         } else {
-          this.isTested = false;
           this.isFire = false;
           this.stopAudio();
         }
