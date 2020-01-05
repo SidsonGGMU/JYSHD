@@ -1,9 +1,9 @@
 <div id="stream-page">
-<ng-container *ngIf="isLoading else dataBlock">
-  <div id="loading">
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-container>
+  <ng-container *ngIf="isLoading else dataBlock">
+    <div id="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
 
   <ng-template #dataBlock>
     <ng-container *ngIf="hasData() else noDataBlock">
