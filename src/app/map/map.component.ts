@@ -51,45 +51,8 @@ export class MapComponent implements OnInit, OnDestroy {
       });
   }
 
-  initializeMap() {
-    const xyzLayer = new TileLayer({
-      source: new XYZ({
-        maxZoom: 18,
-        minZoom: 10,
-        url: this.urlCarto + '/{z}/{x}/{y}.png',
-        attributions: [
-          `Tiles courtesy of <a href="https://www.jawg.io" target="_blank" rel="noopener">jawgmaps</a>
-          - Map data <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">©OpenStreetMap contributors</a>,
-          under ODbL.`
-        ],
-      })
-    });
-    this.view = new View({
-      zoom: this.options.zoom,
-      maxZoom: 19,
-      minZoom: 10
-    });
-    this.map = new Map({
-      target: 'map',
-      layers: [xyzLayer],
-      view: this.view,
-    });
-    return this.map;
-  }
-
   initMap() {
-    const container = document.getElementById('popup');
-    const content = document.getElementById('popup-content');
-    const closer = document.getElementById('popup-closer');
-    const overlay = new Overlay({
-      element: container,
-      autoPan: true,
-      autoPanAnimation: {
-        duration: 250
-      }
-    });
 
-    const styleCache = `style_${this.deviceLocationData[0].name}`;
     const fidecObject = new Feature({
       properties: { ...this.deviceLocationData[0] },
       geometry: new Point(this.projCarte([this.deviceLocationData[0].lon, this.deviceLocationData[0].lat]))
@@ -137,9 +100,8 @@ export class MapComponent implements OnInit, OnDestroy {
         }),
         this.layerPoint
       ],
-      overlays: [overlay],
       view: new View({
-        center: this.projCarte([5.724524, 45.188529]),
+        center: this.projCarte([this.deviceLocationData[0].lon, this.deviceLocationData[0].lat]),
         zoom: this.options.zoom
       })
     });
