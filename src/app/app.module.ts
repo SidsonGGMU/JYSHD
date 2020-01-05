@@ -9,15 +9,20 @@ import {HttpClientModule} from '@angular/common/http';
 import {StreamViewComponent} from './stream-view/stream-view.component';
 import {StreamItemComponent} from './stream-item/stream-item.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule, MatCardModule, MatIconModule, MatProgressSpinnerModule} from '@angular/material';
-
+import {MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatExpansionModule, MatCardModule} from '@angular/material';
+import { MapComponent } from './map/map.component';
+import { RealTimeIconComponent } from './real-time-icon/real-time-icon.component';
+import { FireIconComponent } from './fire-icon/fire-icon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
     StreamViewComponent,
-    StreamItemComponent
+    StreamItemComponent,
+    MapComponent,
+    RealTimeIconComponent,
+    FireIconComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,9 @@ import {MatButtonModule, MatCardModule, MatIconModule, MatProgressSpinnerModule}
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
