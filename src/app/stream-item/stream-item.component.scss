@@ -1,0 +1,47 @@
+
+
+.content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: stretch;
+  margin: auto;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.icon-text-section {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 96px;
+	width: 45%;
+
+	img {
+		max-width: 48px;
+		width: 48px;
+		height: 48px;
+	}
+
+	.values-section {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: stretch;
+
+    .maxTemp{
+      color: #C62828;
+    }
+
+    .minTemp{
+      font-size: 14px;
+      color: #2196F3;
+    }
+	}
+
+  .description-fire-forest-value {
+    color: #757575;
+    font-size: 12px;
+  }
+}

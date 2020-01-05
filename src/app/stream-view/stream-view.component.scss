@@ -1,23 +1,24 @@
 #stream-page {
-  margin: 20px;
+	position: relative;
+	height: calc(100vh - 64px);
+	width: 90%;
+	margin: auto;
 }
 
 #loading {
-
 }
-
 
 .stream-container {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
-  width: 100%;
-  flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 36px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
 }
 
-
 .stream-content {
-  width: 22em;
-  margin-bottom: 40px;
+	width: 22em;
+	margin-bottom: 40px;
 }
