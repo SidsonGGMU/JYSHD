@@ -1,1 +1,56 @@
-<p>accueil works!</p>
+<div class="container">
+  <div class="real-time-section" *ngIf="deviceLocationData">
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title [class.redHot]="isFire">
+            {{deviceLocationData.name}}
+          </mat-panel-title>
+          <mat-panel-description [class.redHot]="isFire">
+            {{deviceLocationData.lat}} / {{deviceLocationData.lon}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title [class.redHot]="isFire">{{deviceLocationData.description}}</mat-card-title>
+            <mat-card-subtitle [class.redHot]="isFire">Dernière mise à jour: {{streamData.at}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="content" [class.redHot]="isFire">
+            <ng-container *ngIf="isFire; else noFire">
+              <app-fire-icon></app-fire-icon>
+            </ng-container>
+            <ng-template #noFire>
+              <app-real-time-icon></app-real-time-icon>
+            </ng-template>
+            {{streamData.data.temperature || 22}}
+          </mat-card-content>
+          <ng-container *ngIf="isFire">
+            <mat-card-actions>
+              <button mat-button color="warn" (click)="stopAudio()">Stopper l'alarme</button>
+            </mat-card-actions>
+          </ng-container>
+        </mat-card>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{fakeFidec.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{fakeFidec.lat}} / {{fakeFidec.lon}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{fakeFidec.description}}</mat-card-title>
+            <mat-card-subtitle>Dernière mise à jour: 07/12/2020 à 03:53:03</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="content">19.7</mat-card-content>
+        </mat-card>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+  <app-map></app-map>
+</div>

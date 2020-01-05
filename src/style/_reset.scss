@@ -1,0 +1,23 @@
+@import "./variables";
+
+html,
+body {
+	height: 100%;
+	box-sizing: border-box;
+	position: relative;
+	-webkit-tap-highlight-color: transparent;
+}
+
+body {
+	margin: 0;
+	font-family: $font-family;
+	@supports (-webkit-overflow-scrolling: touch) {
+		/* Disable Background scroll */
+		overflow: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100vw;
+	}
+}
