@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {criticalTemperature, genericValue, MONTHS} from '../helpers/common';
+import {criticalTemperature, divisor, genericValue, MONTHS} from '../helpers/common';
 import {Result, StreamSummary} from '../models/models';
 
 @Injectable({
@@ -11,11 +11,19 @@ export class StreamSummaryService {
   }
 
   generateStream(streamData: Result[] = []): StreamSummary[] {
+    divisor.value = Math.trunc(streamData.length / 12);
+    let lastIndex = 0;
     let blockInterval = 0;
-    return MONTHS.map(currentMonth => {
-      let tmpData = streamData.filter((value, index) => index >= blockInterval && index < blockInterval + 30);
+    const tmpStreamSummaries = MONTHS.map(currentMonth => {
+      let tmpData = streamData.filter((value, index) => {
+        if (index >= blockInterval && index < blockInterval + divisor.value) {
+          lastIndex = index;
+          return true;
+        }
+        return false;
+      });
+      blockInterval = blockInterval + divisor.value;
       tmpData = this.rebuildTemperature(tmpData);
-      blockInterval = blockInterval + 30;
       return {
         month: currentMonth,
         data: tmpData,
@@ -24,6 +32,11 @@ export class StreamSummaryService {
         nbFire: this.nbFire(tmpData)
       };
     });
+    if (lastIndex < streamData.length - 1) {
+      const lastResults = streamData.filter((item, index) => index > lastIndex)
+      this.addElements(tmpStreamSummaries[tmpStreamSummaries.length - 1], lastResults);
+    }
+    return tmpStreamSummaries;
   }
 
   maxTemperature(streamData: Result[] = []) {
@@ -49,6 +62,14 @@ export class StreamSummaryService {
       }
       return item;
     });
+  }
+
+  addElements(streamSummary: StreamSummary, resultToAdd: Result[] = []) {
+    const tmpResult = this.rebuildTemperature(streamSummary.data.concat(resultToAdd));
+    streamSummary.data = tmpResult;
+    streamSummary.maxTemperature = this.maxTemperature(tmpResult);
+    streamSummary.minTemperature = this.minTemperature(tmpResult);
+    streamSummary.nbFire = this.nbFire(tmpResult);
   }
 
 }
