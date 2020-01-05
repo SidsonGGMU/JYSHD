@@ -58,9 +58,6 @@ export class AccueilComponent implements OnInit, OnDestroy {
       if (this.streamData.data.temperature > criticalTemperature) {
         this.isFire = true;
         this.playAudio();
-      } else {
-        this.isFire = false;
-        this.stopAudio();
       }
     });
     setInterval(() => {
@@ -68,7 +65,7 @@ export class AccueilComponent implements OnInit, OnDestroy {
         this.streamData = data.result[0];
         this.streamData.at = this.getTime(this.streamData.at);
         if (this.streamData.data.temperature > criticalTemperature) {
-          if (!this.stoppedAudio) {
+          if (!this.isFire) {
             this.isFire = true;
             this.playAudio();
           }
@@ -101,6 +98,5 @@ export class AccueilComponent implements OnInit, OnDestroy {
 
   stopAudio() {
     this.audio.pause();
-    this.stoppedAudio = true;
   }
 }
