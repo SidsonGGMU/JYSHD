@@ -95,4 +95,11 @@ export interface WeatherData {
   request: Request;
   location: Location;
   current: Current;
+
+export interface StreamSummary {
+  month: string;
+  data: Result[];
+  minTemperature: number;
+  maxTemperature: number;
+  nbFire: number;
 }
