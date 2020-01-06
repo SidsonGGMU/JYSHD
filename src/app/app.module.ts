@@ -13,6 +13,7 @@ import {MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatExpansionMo
 import { MapComponent } from './map/map.component';
 import { RealTimeIconComponent } from './real-time-icon/real-time-icon.component';
 import { FireIconComponent } from './fire-icon/fire-icon.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FireIconComponent } from './fire-icon/fire-icon.component';
     StreamItemComponent,
     MapComponent,
     RealTimeIconComponent,
-    FireIconComponent
+    FireIconComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
