@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ApixuService } from '../services/apixu.service';
 import { criticalTemperature, fakeFidecObject } from '../helpers/common';
 import { MapService } from '../services/map.service';
+import { Style } from 'ol/style';
 
 @Component({
   selector: 'app-accueil',
