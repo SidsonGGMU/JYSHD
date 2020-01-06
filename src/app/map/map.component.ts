@@ -13,6 +13,7 @@ import Point from 'ol/geom/Point';
 import { Icon, Style } from 'ol/style';
 import { fakeFidecObject } from '../helpers/common';
 import Overlay from 'ol/Overlay';
+import { MapService } from '../services/map.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class MapComponent implements OnInit, OnDestroy {
   currentCenter: Coordinate;
   private urlCarto = 'http://a.tile.openstreetmap.fr/hot/';
 
-  constructor(private dataService: DataserviceService) { }
+  constructor(private dataService: DataserviceService, private mapService: MapService) { }
 
   ngOnInit() {
     this.sourcePoints = new VectorSource({});
@@ -54,31 +55,18 @@ export class MapComponent implements OnInit, OnDestroy {
   initMap() {
 
     const fidecObject = new Feature({
+      id: `${this.deviceLocationData[0].id_developer}_device1`,
       properties: { ...this.deviceLocationData[0] },
       geometry: new Point(this.projCarte([this.deviceLocationData[0].lon, this.deviceLocationData[0].lat]))
     });
-    fidecObject.setStyle(new Style({
-      image: new Icon(({
-        color: '#FFFFFF',
-        crossOrigin: 'anonymous',
-        src: 'assets/ts-map-pin.svg',
-        anchor: [0.5, 1],
-        imgSize: [48, 48]
-      }))
-    }));
+    fidecObject.setStyle(new Style(this.mapService.styleConfig.normal));
+
     const fakeFidecFeature = new Feature({
       properties: { ...fakeFidecObject },
       geometry: new Point(this.projCarte([fakeFidecObject.lon, fakeFidecObject.lat]))
     });
-    fakeFidecFeature.setStyle(new Style({
-      image: new Icon(({
-        color: '#FFFFFF',
-        crossOrigin: 'anonymous',
-        src: 'assets/ts-map-pin.svg',
-        anchor: [0.5, 1],
-        imgSize: [48, 48]
-      }))
-    }));
+    fakeFidecFeature.setStyle(new Style(this.mapService.styleConfig.normal));
+
     this.sourcePoints.addFeatures([fidecObject, fakeFidecFeature]);
 
     this.layerPoint = new VectorLayer({
